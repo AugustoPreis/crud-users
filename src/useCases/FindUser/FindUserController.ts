@@ -13,7 +13,7 @@ export class FindUserController {
 			return res.status(202).send(result);
 		} catch (error) {
 			return res.status(400).json({
-				message: error.message || 'Erro inesperado!',
+				message: error.message || 'Unexpected error!',
 			});
 		}
 	}

@@ -21,6 +21,8 @@ export class PostgresUsersRepository implements IUsersRepository {
 	async edit(user: User): Promise<void> {
 		const index = this.users.findIndex(el => el.id === user.id);
 
+		if (index === -1) throw new Error('User not found!');
+
 		this.users[index] = user;
 	}
 
