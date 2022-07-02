@@ -10,6 +10,10 @@ export class PostgresUsersRepository implements IUsersRepository {
 		return user;
 	}
 
+	async findAll() {
+		return this.users;
+	}
+
 	async save(user: User): Promise<void> {
 		this.users.push(user);
 	}
