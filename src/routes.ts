@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createUserController } from "./useCases/CreateUser";
+import { deleteUserController } from "./useCases/DeleteUser";
 import { editUserController } from "./useCases/EditUser";
 import { findUserController } from "./useCases/FindUser";
 
@@ -15,6 +16,10 @@ router.post('/users', (req, res) => {
 
 router.put('/users', (req, res) => {
 	return editUserController.handle(req, res);
+});
+
+router.delete('/users', (req, res) => {
+	return deleteUserController.handle(req, res);
 });
 
 export { router }

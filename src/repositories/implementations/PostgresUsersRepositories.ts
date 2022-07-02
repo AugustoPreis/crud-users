@@ -23,4 +23,12 @@ export class PostgresUsersRepository implements IUsersRepository {
 
 		this.users[index] = user;
 	}
+
+	async deleteById(id: string): Promise<void> {
+		const index = this.users.findIndex(el => el.id === id);
+
+		if (index === -1) throw new Error('User not found!');
+
+		this.users.splice(index, 1);
+	}
 }
