@@ -1,6 +1,5 @@
-import { Response } from "express";
 import { User } from "../../entities/User";
-import { IUsersRepository } from "../../repositories/IUsersRepostiory";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { IEditUserDTO } from "./EditUserDTO";
 
 export class EditUserUseCase {

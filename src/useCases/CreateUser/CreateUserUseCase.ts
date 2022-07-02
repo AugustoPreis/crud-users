@@ -1,7 +1,7 @@
 import { IMailProvider } from '../../providers/IMailProvider';
 import { User } from '../../entities/User';
 import { ICreateUserDTO } from './CreateUserDTO';
-import { IUsersRepository } from '../../repositories/IUsersRepostiory';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 export class CreateUserUseCase {
 	constructor(
@@ -17,7 +17,7 @@ export class CreateUserUseCase {
 		const user = new User(data);
 
 		await this.usersRepository.save(user);
-		
+
 		await this.mailProvider.sendMail({
 			to: {
 				name: data.name,
@@ -29,6 +29,6 @@ export class CreateUserUseCase {
 			},
 			subject: 'Hello!',
 			body: '<p>Welcome to my plataform</p>'
-		})
+		});
 	}
 }
