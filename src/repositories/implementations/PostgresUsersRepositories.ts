@@ -10,6 +10,14 @@ export class PostgresUsersRepository implements IUsersRepository {
 		return user;
 	}
 
+	async findById(id: string): Promise<User> {
+		const index = this.users.findIndex(el => el.id === id);
+
+		if (index === -1) throw new Error('User not found!');
+
+		return this.users[index];
+	}
+
 	async findAll() {
 		return this.users;
 	}

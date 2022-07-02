@@ -6,4 +6,5 @@ export interface IUsersRepository {
 	edit(user: User): Promise<void>,
 	findAll(): Promise<User[]>,
 	deleteById(id: string): Promise<void>,
+	findById(id: string): Promise<User>,
 }
