@@ -1,44 +1,37 @@
+import { Database } from '../../database';
 import { User } from '../../entities/User';
 import { IUsersRepository } from '../IUsersRepository';
 
 export class PostgresUsersRepository implements IUsersRepository {
-	private users: User[] = [];
+	private repository = Database.getRepository(User);
 
 	async findByEmail(email: string): Promise<User> {
-		const user = this.users.find(user => user.email === email);
+		const user = await this.repository.findOneBy({ email });
 
 		return user;
 	}
 
 	async findById(id: string): Promise<User> {
-		const index = this.users.findIndex(el => el.id === id);
+		const user = await this.repository.findOneBy({ id });
 
-		if (index === -1) throw new Error('User not found!');
-
-		return this.users[index];
+		return user;
 	}
 
 	async findAll() {
-		return this.users;
+		const users = await this.repository.find();
+
+		return users;
 	}
 
 	async save(user: User): Promise<void> {
-		this.users.push(user);
+		await this.repository.save(user);
 	}
 
 	async edit(user: User): Promise<void> {
-		const index = this.users.findIndex(el => el.id === user.id);
-
-		if (index === -1) throw new Error('User not found!');
-
-		this.users[index] = user;
+		await this.repository.update(user.id, user);
 	}
 
 	async deleteById(id: string): Promise<void> {
-		const index = this.users.findIndex(el => el.id === id);
-
-		if (index === -1) throw new Error('User not found!');
-
-		this.users.splice(index, 1);
+		await this.repository.delete({ id });
 	}
 }
