@@ -15,9 +15,9 @@ export class User {
 	@Column('varchar', { length: 50 })
 	public password: string;
 
-	constructor(props: Omit<User, 'id'>, id?: string) {
-		Object.assign(this, props);
+	constructor(props: User) {
+		if (!props?.id) this.id = uuid();
 
-		if (!id) this.id = uuid();
+		Object.assign(this, props);
 	}
 }
